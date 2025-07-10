@@ -63,12 +63,13 @@ function App() {
     setCode(DEFAULT_CODE[language] || "")
   }, [language])
 
-  async function reviewCode() {
+    async function reviewCode() {
     setLoading(true)
-     const response = await axios.post(`${localhost}/ai/get-review`, {
-    language,
-    code,
-  })
+    try {
+      const response = await axios.post(`${localhost}/ai/get-review`, {
+        language,
+        code,
+      })
       setReview(response.data)
     } catch (err) {
       setReview("Error: " + err.message)
@@ -76,6 +77,7 @@ function App() {
       setLoading(false)
     }
   }
+
 
   return (
     <main>
