@@ -7,7 +7,7 @@ import rehypeHighlight from "rehype-highlight"
 import "highlight.js/styles/github-dark.css"
 import axios from 'axios'
 import './App.css'
-
+const localhost="https://codereview-4pgc.onrender.com";
 const LANGUAGES = [
   { label: "Java 8", value: "java8" },
   { label: "Java 11", value: "java11" },
@@ -62,11 +62,10 @@ function App() {
 
   async function reviewCode() {
     setLoading(true)
-    try {
-      const response = await axios.post('http://localhost:3000/ai/get-review', {
-        language,
-        code,
-      })
+     const response = await axios.post(`${localhost}/ai/get-review`, {
+    language,
+    code,
+  })
       setReview(response.data)
     } catch (err) {
       setReview("Error: " + err.message)
